@@ -1,3 +1,12 @@
+## ✍️ DevLog Updates
+### [27/09/2026] — Repo Cleanup
+
+- Restructured README and DevLog into separate files for clarity
+- Fixed file path linking issue between the two
+- Pushed changes to GitHub
+
+
+
 ## ✨ Background
 
 ***HI PROGRAMMERS/DEVELOPERS!***
