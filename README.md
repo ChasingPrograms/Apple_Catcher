@@ -30,7 +30,7 @@ This is my first personal Java project, built to strengthen my OOP and game-loop
 
 ## 📓 Development Log
 
-Curious how this was built, concept by concept? See [`DevLog.md`](DevLog.md) for the full build process, including explanations of threads, game loops, and OOP decisions along the way.
+Curious how this was built, concept by concept? See [`Documents/DevLog.md`](Documents/DevLog.md) for the full build process, including explanations of threads, game loops, and OOP decisions along the way.
 
 ## 👤 Author
 
