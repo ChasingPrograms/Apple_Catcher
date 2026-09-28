@@ -1,7 +1,7 @@
 ## ✍️ DevLog Updates
-### [28/09/2026] — Repo Cleanup
+### [28/09/2026] — DevLOG Updated
 
-- Updated DevLog
+- Added explanation for the Delta Interval Loop
 
 
 
