@@ -1,9 +1,7 @@
 ## ✍️ DevLog Updates
-### [27/09/2026] — Repo Cleanup
+### [28/09/2026] — Repo Cleanup
 
-- Restructured README and DevLog into separate files for clarity
-- Fixed file path linking issue between the two
-- Pushed changes to GitHub
+- Updated DevLog
 
 
 
@@ -27,7 +25,8 @@
 
 ## 🧠 Development Of The Game
 
-### --- 1.1 ~ Creating The Game Frame ---
+### --- 1 ~ Creating the Game Window ---
+#### The Game Panel
 
 - As we know, each and every app / game has a pop-up window. <br>
   Thankfully, Java has a built-in class that allows us to create a window for our game. <br>
@@ -45,9 +44,9 @@
   We set its visibility to `true` using the `setVisible()` method: **`window.setVisible(true);`**
 
 - The game window should look like this: <br>
- ``// Insert Figure A here \\``  
+ ``// Insert Figure A here \\`` <br><br>
 
-### --- 1.2 ~ Creating The Game Panel ---
+#### The Game Frame
 
 - We will then create a new class called ``Panel.java``. <br>
 The reason for this is class management: separating the panel from the main class helps prevent the code from becoming cluttered and allows us to independently modify or update the panel when needed.
@@ -179,7 +178,6 @@ public void run(){
  ---
 
 ### --- 3 ~ Creating The Catcher ---
-
 #### Creating the ``Catcher`` Class
 
 - ***This is the fun part of my build: creating the catcher entity.*** <br>
@@ -208,8 +206,9 @@ public Catcher(Panel gp){
     Allowing us to automatically set its starting position.*/
 }
 ```
+<br>
 
-#### Creating the graphics of our catcher
+#### Creating the graphics of our catcher:
 
 - We then create the ``defaultPos()`` method, setting the Catcher's starting position within the game panel:
 
@@ -237,4 +236,49 @@ public void draw(Graphics2D g2){
 - To make our Catcher appear on the screen, we must first create a ``Catcher`` object within our ``Panel`` class. <br> Then, inside the ``paintComponent()`` method, we call the Catcher's ``draw()`` method using ``catcher.draw(g2);``.
 
 - If we run our Java Code, it would look something like this: <br>
- ``// Insert Figure C here \\``  
+ ``// Insert Figure C here \\`` <br><br>
+
+#### Making the game run 60FPS:
+- Remember, we want our game to run 60 FPS, meaning we want our graphics to update 60 times per second. <br>
+In order to make this possible, we have to update our **Game Loop.**
+
+- Initially, my game loop called the ``update()`` and ``repaint()`` methods, <br>
+Because of this, the game speed relied on the computer's execution speed.
+
+- A better solution is using the **delta interval** technique... <br>
+So back in our ``Panel`` class we will include the following variables:
+  1. ``drawInterval`` - *(double)* - How long one frame should last, in nanoseconds. <br>
+     - There are 1,000,000,000 nanoseconds in a second, so ``1000000000 / fps`` gives us the time per frame at 60 FPS.
+     - ``double drawInterval = 1000000000 / fps;``
+  2. ``delta`` - *(double)* - Tracks how much of a frame has "built up" so far. <br>
+     - Once it reaches ``1``, a full frame's worth of time has passed.
+     - ``double delta = 0;``
+  3. ``lastTime`` - *(long)* - The time recorded on the previous pass of the loop, taken from ``System.nanoTime()``.
+      - ``long lastTime = System.nanoTime();``
+  4. ``currentTime`` - *(long)* - The time recorded on the current pass of the loop.
+      - ``long currentTime;``
+
+- We will create a while loop that checks if ``gameThread`` is not ``null``.
+  - ``while(gameThread != null){``
+
+- Then, inside the loop, each pass we:
+  1. Get the ``currentTime``.
+  2. Add ``(currentTime - lastTime) / drawInterval`` to ``delta``. <br>This is the fraction of a frame that has passed since the last pass.
+  3. Set ``lastTime = currentTime`` so the next pass measures from now.
+  4. If ``delta >= 1``, we ``update()``, ``repaint()``, and subtract ``1`` from ``delta``.
+
+- The result: no matter how fast the computer spins the loop, ``update()`` and ``repaint()`` only run 60 times per second.
+
+```java
+while(gameThread != null){
+    currentTime = System.nanoTime();
+    delta += (currentTime - lastTime) / drawInterval;
+    lastTime = currentTime;
+
+    if(delta >= 1){
+        update();
+        repaint();
+        delta--;
+    }
+}
+```
