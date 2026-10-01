@@ -1,7 +1,6 @@
 package Entity;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.util.Random;
 
 import Handler.AppleHandler;
@@ -27,7 +26,6 @@ public class Apple extends Entity{
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.red);
-        g2.fillOval(x, y, 50, 50);
+        ah.spawn(g2);
     }
 }
