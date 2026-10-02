@@ -6,15 +6,17 @@ import java.util.Random;
 import Entity.Apple;
 import Main.Panel;
 
-public class AppleHandler {
+public class AppleHandler{
 
     Apple apple;
     Panel gp;
     Random ran = new Random();
+    CollisionHandler ch;
 
-    public AppleHandler(Apple apple, Panel gp){
+    public AppleHandler(Apple apple, Panel gp, CollisionHandler ch){
         this.apple = apple;
         this.gp = gp;
+        this.ch = ch;
     }
 
     public void fall(){
@@ -22,19 +24,18 @@ public class AppleHandler {
             apple.y += apple.speed;
         }
         else{
-            apple.miss = true;
+            ch.miss = true;
             respawn();
         }
     }
 
     public void collisionReset(){
-        apple.miss = false;
-        apple.caught = false;
+        ch.miss = false;
+        ch.caught = false;
     }
     public void respawn(){
         apple.x = ran.nextInt(gp.w - 100);
         apple.y = 0;
-        collisionReset();
         
     }
 

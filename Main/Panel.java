@@ -1,7 +1,9 @@
 package Main;
 
 import Entity.*;
+import Handler.CollisionHandler;
 import Handler.KeyHandler;
+import Handler.ScoreHandler;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -13,6 +15,12 @@ public class Panel extends JPanel implements Runnable{
     //KeyHandler
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+
+    //CollisionHandler
+    CollisionHandler collH = new CollisionHandler();
+
+    //ScoreHandler
+    ScoreHandler scoreH = new ScoreHandler(this,collH);
     
     //Panel Dimensions
     public  final int w = 800;
@@ -22,7 +30,7 @@ public class Panel extends JPanel implements Runnable{
     Catcher catcher = new Catcher(this,keyH); 
 
     //Creating the apple
-    Apple apple = new Apple(this); 
+    Apple apple = new Apple(this, collH); 
 
     //Panel Constructor
     public Panel(){ 
@@ -61,6 +69,7 @@ public class Panel extends JPanel implements Runnable{
     public void update(){
         catcher.update();
         apple.update();
+        scoreH.update();
     }
 
     public void paintComponent(Graphics g){
@@ -68,5 +77,6 @@ public class Panel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D) g; // Casts g from Graphics to Graphics2D and stores it in g2
         catcher.draw(g2);
         apple.draw(g2);
+        scoreH.draw(g2);
     }
 }
