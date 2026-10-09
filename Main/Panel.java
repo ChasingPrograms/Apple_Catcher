@@ -30,7 +30,7 @@ public class Panel extends JPanel implements Runnable{
     Catcher catcher = new Catcher(this,keyH); 
 
     //Creating the apple
-    Apple apple = new Apple(this, collH); 
+    Apple apple = new Apple(this, collH, keyH); 
 
     //Panel Constructor
     public Panel(){ 
@@ -69,6 +69,8 @@ public class Panel extends JPanel implements Runnable{
     public void update(){
         catcher.update();
         apple.update();
+        collH.checkCollision(apple, catcher, h);
+        if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
     }
 

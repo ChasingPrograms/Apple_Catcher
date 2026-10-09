@@ -2,7 +2,6 @@ package Handler;
 
 import java.awt.*;
 import java.util.Random;
-
 import Entity.Apple;
 import Main.Panel;
 
@@ -20,19 +19,10 @@ public class AppleHandler{
     }
 
     public void fall(){
-         if(apple.y < gp.h - 50){
-            apple.y += apple.speed;
-        }
-        else{
-            ch.miss = true;
-            respawn();
-        }
+        apple.y += apple.speed;
+
     }
 
-    public void collisionReset(){
-        ch.miss = false;
-        ch.caught = false;
-    }
     public void respawn(){
         apple.x = ran.nextInt(gp.w - 100);
         apple.y = 0;

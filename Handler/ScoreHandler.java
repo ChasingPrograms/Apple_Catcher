@@ -7,7 +7,7 @@ public class ScoreHandler{
 
     Panel gp; // Our GamePanel instance
     CollisionHandler ch; //Our Collision Handler
-    public int score;
+    public int score,miss;
 
     public ScoreHandler(Panel gp, CollisionHandler ch) {
         this.gp = gp;
@@ -16,8 +16,11 @@ public class ScoreHandler{
 
     public void update(){
         if(ch.miss){
+            miss++;
+        }
+
+        else if(ch.caught){
             score++;
-            ch.miss = false; // reset so it only counts once per catch
         }
     }
 
@@ -25,5 +28,6 @@ public class ScoreHandler{
         g2.setColor(Color.white);
         g2.setFont(new Font("Arial", Font.PLAIN, 20));
         g2.drawString("Score: " + score, (gp.w-100), (50));
+        g2.drawString("Miss: " + miss, (gp.w-100), (100));
     }
 }
