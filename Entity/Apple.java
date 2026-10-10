@@ -18,7 +18,6 @@ public class Apple extends Entity{
         this.kh = kh;
 
         x = ran.nextInt(gp.w - 100);
-        speed = 1;
 
         ah = new AppleHandler(this, gp);
     }
@@ -28,11 +27,11 @@ public class Apple extends Entity{
 
     public void update(){
         if(kh.downPressed){
-            speed = 2;
+            speed = 5;
         }
 
         else{
-            speed = 1;
+            speed = 3;
         }
 
         ah.fall();
