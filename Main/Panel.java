@@ -21,6 +21,9 @@ public class Panel extends JPanel implements Runnable{
 
     //ScoreHandler
     ScoreHandler scoreH = new ScoreHandler(this,collH);
+
+    //BackgroundHandler
+    
     
     //Panel Dimensions
     public  final int w = 800;
@@ -30,7 +33,7 @@ public class Panel extends JPanel implements Runnable{
     Catcher catcher = new Catcher(this,keyH); 
 
     //Creating the apple
-    Apple apple = new Apple(this, collH, keyH); 
+    Apple apple = new Apple(this, keyH); 
 
     //Panel Constructor
     public Panel(){ 
@@ -77,8 +80,8 @@ public class Panel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // Casts g from Graphics to Graphics2D and stores it in g2
-        catcher.draw(g2);
         apple.draw(g2);
+        catcher.draw(g2);
         scoreH.draw(g2);
     }
 }

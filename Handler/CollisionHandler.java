@@ -24,12 +24,6 @@ public class CollisionHandler {
         if(apple.y >= panelH - 50){
             miss = true;
         }
-
-        // Check 4: A side hit.
-        if(xCollision && (apple.y + 50) > catcher.y + 10){
-            miss = true;
-        }
-
     }
 
     public void resetCollision(){

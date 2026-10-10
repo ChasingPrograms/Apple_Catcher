@@ -1,6 +1,8 @@
 package Entity;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.*;
 
 import Handler.KeyHandler;
 import Main.Panel;
@@ -8,18 +10,30 @@ import Main.Panel;
 public class Catcher extends Entity{
     Panel gp; //Our Gamepanel instance
     KeyHandler kh; //Key Handler instance
+    BufferedImage image;
+
+
 
     public Catcher(Panel gp, KeyHandler kh){
         this.gp = gp;
         this.kh = kh;
         defaultPos();
+        getImage();
+    }
+
+    public void getImage(){
+        try {
+            image = ImageIO.read(new File("res/Catcher_Media.png"));
+        } catch (IOException e) {
+             e.printStackTrace();
+        }
     }
 
     public void defaultPos(){
         //Default position for our catcher, Bottom Center of the Screen
         x = ((gp.w / 2) - 50);
-        y = (gp.h - 100);
-        speed = 2;
+        y = (gp.h - 50);
+        speed = 10;
     }
     
     public void update(){ //Update Method
@@ -43,7 +57,14 @@ public class Catcher extends Entity{
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
-        g2.fillRect(x, y, 100, 100);
+        if(image != null){
+            g2.drawImage(image,x,y,100,50,null);
+        }
+        
+        else{
+            g2.setColor(Color.white);
+            g2.fillRect(x, y, 100, 50);
+        }
+        
     }
 }
