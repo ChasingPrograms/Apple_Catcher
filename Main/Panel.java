@@ -1,9 +1,7 @@
 package Main;
 
 import Entity.*;
-import Handler.CollisionHandler;
-import Handler.KeyHandler;
-import Handler.ScoreHandler;
+import Handler.*;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -23,7 +21,10 @@ public class Panel extends JPanel implements Runnable{
     ScoreHandler scoreH = new ScoreHandler(this,collH);
 
     //BackgroundHandler
-    
+    BackgroundHandler backH = new BackgroundHandler(this);
+
+    //SoundHandler
+    SoundHandler soundH = new SoundHandler();
     
     //Panel Dimensions
     public  final int w = 800;
@@ -45,6 +46,7 @@ public class Panel extends JPanel implements Runnable{
     }
 
     public void launch(){ //Method to start the gameThread
+        soundH.playMusic(); //Starts Music
         gameThread = new Thread(this); //Creates a new game thread
         gameThread.start(); //Starts the game thread
     }
@@ -73,6 +75,8 @@ public class Panel extends JPanel implements Runnable{
         catcher.update();
         apple.update();
         collH.checkCollision(apple, catcher, h);
+        if(collH.caught){soundH.playCatch();} //Play Caught SFX
+        if(collH.miss){soundH.playMiss();} //Play Missed SFX
         if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
     }
@@ -80,6 +84,7 @@ public class Panel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // Casts g from Graphics to Graphics2D and stores it in g2
+        backH.draw(g2);
         apple.draw(g2);
         catcher.draw(g2);
         scoreH.draw(g2);

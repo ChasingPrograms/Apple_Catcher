@@ -19,7 +19,7 @@ public class BackgroundHandler {
 
     public void getImage(){
         try {
-            image = ImageIO.read(new File("res/Sky.png"));
+            image = ImageIO.read(new File("res/Sky1.png"));
         } catch (IOException e) {
             e.printStackTrace(); // image stays null, so the black panel shows instead
         }

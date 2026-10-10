@@ -1,9 +1,11 @@
 ## ✍️ DevLog Updates
-### [27/09/2026] — Repo Cleanup
+### [10/10/2026] — Added Visual Media and Sound Effects
 
-- Restructured README and DevLog into separate files for clarity
-- Fixed file path linking issue between the two
-- Pushed changes to GitHub
+- Added a Resource Folder
+- Music and SFX Added
+- Art for Background, Apple and Catcher Added
+- Updated Collision
+- Deleted Media Folder
 
 
 
