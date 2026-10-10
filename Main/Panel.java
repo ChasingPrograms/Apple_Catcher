@@ -68,6 +68,15 @@ public class Panel extends JPanel implements Runnable{
                 repaint(); //Draw Method
                 delta--;
             }
+
+            else{ //This will help the CPU from overheating
+                try {
+                    Thread.sleep(1);
+                } 
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     

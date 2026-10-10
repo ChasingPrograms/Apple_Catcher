@@ -21,7 +21,7 @@ public class CollisionHandler {
         }
 
         // Check 3: If the apple reaches the bottom = miss.
-        if(apple.y >= panelH - 50){
+        else if(apple.y >= panelH - 50){
             miss = true;
         }
     }

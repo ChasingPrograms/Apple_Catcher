@@ -1,6 +1,5 @@
 package Entity;
 import java.awt.*;
-import java.util.*;
 
 import Handler.AppleHandler;
 import Main.Panel;
@@ -10,16 +9,14 @@ public class Apple extends Entity{
 
     Panel gp; // Our GamePanel instance
     AppleHandler ah; // Our AppleHandler instance
-    Random ran = new Random();
     KeyHandler kh;
 
     public Apple(Panel gp, KeyHandler kh){
         this.gp = gp;
         this.kh = kh;
 
-        x = ran.nextInt(gp.w - 100);
-
         ah = new AppleHandler(this, gp);
+        respawn();
     }
     public void respawn(){
         ah.respawn();
