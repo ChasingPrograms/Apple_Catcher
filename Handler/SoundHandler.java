@@ -47,9 +47,8 @@ public class SoundHandler {
     }
 
     public void playGameOver(){
+        if(musicClip != null) musicClip.stop();
         if(gameOverClip == null) return;
-        musicClip.stop();
-        catchClip.setFramePosition(0); // rewind to the start
         gameOverClip.start();
     }
 }

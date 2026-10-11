@@ -97,7 +97,6 @@ public class Panel extends JPanel implements Runnable{
     public void update(){
 
         if(gH.state == GameStateHandler.State.GAMEOVER){
-            soundH.playGameOver();
             return;
         }
         
@@ -141,6 +140,7 @@ public class Panel extends JPanel implements Runnable{
         scoreH.draw(g2);
 
         if(gH.state == GameStateHandler.State.GAMEOVER){
+            soundH.playGameOver();
             gH.drawGameOver(g2);
         }
     }
