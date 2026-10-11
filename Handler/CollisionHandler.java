@@ -12,10 +12,10 @@ public class CollisionHandler {
         resetCollision();
 
         // Check 1: Apple / Catcher over-laps at the x-axis.
-        boolean xCollision = ((apple.x +50) > catcher.x) && (apple.x <(catcher.x+100));
+        boolean xCollision = ((apple.x +30) > catcher.x) && (apple.x <(catcher.x+80));
 
         // Check 2: Apple / Catcher over-laps at the y-axis.
-        boolean yCollision = (apple.y +50) >= catcher.y;
+        boolean yCollision = (apple.y >= catcher.y);
         if(xCollision && yCollision){
             caught = true;
         }

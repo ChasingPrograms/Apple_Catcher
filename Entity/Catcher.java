@@ -33,7 +33,7 @@ public class Catcher extends Entity{
         //Default position for our catcher, Bottom Center of the Screen
         x = ((gp.w / 2) - 50);
         y = (gp.h - 50);
-        speed = 8;
+        speed = 6;
     }
     
     public void update(){ //Update Method
