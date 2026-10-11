@@ -12,8 +12,6 @@ public class Catcher extends Entity{
     KeyHandler kh; //Key Handler instance
     BufferedImage image;
 
-    public boolean pause;
-
 
 
     public Catcher(Panel gp, KeyHandler kh){
@@ -36,10 +34,6 @@ public class Catcher extends Entity{
         x = ((gp.w / 2) - 50);
         y = (gp.h - 50);
         speed = 6;
-    }
-
-    public void catcherPause(){
-        speed = 0;
     }
     
     public void update(){ //Update Method

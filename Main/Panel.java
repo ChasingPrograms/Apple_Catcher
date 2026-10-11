@@ -97,6 +97,7 @@ public class Panel extends JPanel implements Runnable{
     public void update(){
 
         if(gH.state == GameStateHandler.State.GAMEOVER){
+            soundH.playGameOver();
             return;
         }
         

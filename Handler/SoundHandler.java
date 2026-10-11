@@ -5,12 +5,13 @@ import javax.sound.sampled.*;
 
 public class SoundHandler {
     
-    Clip catchClip,missClip,musicClip;
+    Clip catchClip,missClip,musicClip,gameOverClip;
 
     public SoundHandler(){
         catchClip = load("res/Caught.wav");
         missClip = load("res/Miss.wav");
         musicClip = load("res/Background.wav");
+        gameOverClip = load("res/GameOver.wav");
     }
 
     private Clip load(String path){
@@ -43,5 +44,12 @@ public class SoundHandler {
         missClip.stop();              // cut off the previous play if still going
         missClip.setFramePosition(0); // rewind to the start
         missClip.start();
+    }
+
+    public void playGameOver(){
+        if(gameOverClip == null) return;
+        musicClip.stop();
+        catchClip.setFramePosition(0); // rewind to the start
+        gameOverClip.start();
     }
 }

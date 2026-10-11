@@ -10,7 +10,6 @@ public class Apple extends Entity{
     Panel gp; // Our GamePanel instance
     AppleHandler ah; // Our AppleHandler instance
     KeyHandler kh;
-    public boolean pause;
 
     public Apple(Panel gp, KeyHandler kh){
         this.gp = gp;
@@ -25,21 +24,15 @@ public class Apple extends Entity{
 
     public void update(){
 
-        if(!pause){
-            if(kh.downPressed){
-                speed = 5;
-            }
-
-            else{
-                speed = 3;
-            }
-
-            ah.fall();
+        if(kh.downPressed){
+            speed = 5;
         }
 
         else{
-            ah.applePause();
+            speed = 3;
         }
+
+        ah.fall();
     }
 
     public void draw(Graphics2D g2){
