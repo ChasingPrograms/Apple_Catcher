@@ -5,6 +5,7 @@ import Handler.*;
 
 import java.awt.*;
 import javax.swing.JPanel;
+import java.util.Random;
 
 public class Panel extends JPanel implements Runnable{
 
@@ -25,6 +26,9 @@ public class Panel extends JPanel implements Runnable{
 
     //SoundHandler
     SoundHandler soundH = new SoundHandler();
+
+    //Random
+    Random ran = new Random();
     
     //Panel Dimensions
     public  final int w = 800;
@@ -32,6 +36,12 @@ public class Panel extends JPanel implements Runnable{
 
     //Creating the catcher
     Catcher catcher = new Catcher(this,keyH); 
+
+    //Shake Effect
+    int shakeTimer = 0;
+    int shakeDuration = 15;
+    final int shakeStength = 10;
+    int shakeX,shakeY = 0; 
 
     //Creating the apple
     Apple apple = new Apple(this, keyH); 
@@ -85,7 +95,19 @@ public class Panel extends JPanel implements Runnable{
         apple.update();
         collH.checkCollision(apple, catcher, h);
         if(collH.caught){soundH.playCatch();} //Play Caught SFX
-        if(collH.miss){soundH.playMiss();} //Play Missed SFX
+        if(collH.miss){
+            shakeTimer = shakeDuration;
+            soundH.playMiss();} //Play Missed SFX
+
+        if(shakeTimer > 0){
+        int power = shakeStength * shakeTimer / shakeDuration; // fades out
+        shakeX = ran.nextInt(power * 2 + 1) - power;            // -power to +power
+        shakeY = ran.nextInt(power * 2 + 1) - power;
+        shakeTimer--;
+} else {
+    shakeX = 0;
+    shakeY = 0;
+}
         if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
     }
@@ -93,9 +115,12 @@ public class Panel extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // Casts g from Graphics to Graphics2D and stores it in g2
+        g2.translate(shakeX, shakeY);
         backH.draw(g2);
         apple.draw(g2);
         catcher.draw(g2);
+        g2.translate(-shakeX, -shakeY);  // undo, so the score text stays steady
         scoreH.draw(g2);
+
     }
 }
