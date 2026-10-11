@@ -40,7 +40,7 @@ public class Panel extends JPanel implements Runnable{
     //Shake Effect
     int shakeTimer = 0;
     int shakeDuration = 15;
-    final int shakeStength = 10;
+    final int shakeStength = 5;
     int shakeX,shakeY = 0; 
 
     //Creating the apple
@@ -101,13 +101,14 @@ public class Panel extends JPanel implements Runnable{
 
         if(shakeTimer > 0){
         int power = shakeStength * shakeTimer / shakeDuration; // fades out
-        shakeX = ran.nextInt(power * 2 + 1) - power;            // -power to +power
+        shakeX = ran.nextInt(power * 2 + 1) - power; // -power to +power
         shakeY = ran.nextInt(power * 2 + 1) - power;
         shakeTimer--;
-} else {
-    shakeX = 0;
-    shakeY = 0;
-}
+        } else {
+            shakeX = 0;
+            shakeY = 0;
+        }
+        
         if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
     }
