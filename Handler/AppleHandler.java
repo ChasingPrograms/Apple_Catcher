@@ -35,6 +35,10 @@ public class AppleHandler{
 
     }
 
+    public void applePause(){
+        apple.speed = 0;
+    }
+
     public void respawn(){
         apple.x = ran.nextInt(gp.w - 100);
         apple.y = 0;

@@ -27,6 +27,9 @@ public class Panel extends JPanel implements Runnable{
     //SoundHandler
     SoundHandler soundH = new SoundHandler();
 
+    //GameState Handler
+    GameStateHandler gH = new GameStateHandler(this);
+
     //Random
     Random ran = new Random();
     
@@ -44,7 +47,8 @@ public class Panel extends JPanel implements Runnable{
     int shakeX,shakeY = 0; 
 
     //Creating the apple
-    Apple apple = new Apple(this, keyH); 
+    Apple apple = new Apple(this, keyH);
+
 
     //Panel Constructor
     public Panel(){ 
@@ -91,6 +95,11 @@ public class Panel extends JPanel implements Runnable{
     }
     
     public void update(){
+
+        if(gH.state == GameStateHandler.State.GAMEOVER){
+            return;
+        }
+        
         catcher.update();
         apple.update();
         collH.checkCollision(apple, catcher, h);
@@ -108,9 +117,16 @@ public class Panel extends JPanel implements Runnable{
             shakeX = 0;
             shakeY = 0;
         }
-        
         if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
+
+        if(scoreH.miss >= 3){
+        gH.state = GameStateHandler.State.GAMEOVER;
+        shakeX = 0;
+        shakeY = 0;
+        shakeTimer = 0;
+    }
+        
     }
 
     public void paintComponent(Graphics g){
@@ -123,5 +139,8 @@ public class Panel extends JPanel implements Runnable{
         g2.translate(-shakeX, -shakeY);  // undo, so the score text stays steady
         scoreH.draw(g2);
 
+        if(gH.state == GameStateHandler.State.GAMEOVER){
+            gH.drawGameOver(g2);
+        }
     }
 }
