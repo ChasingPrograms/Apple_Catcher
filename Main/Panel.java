@@ -46,8 +46,9 @@ public class Panel extends JPanel implements Runnable{
     final int shakeStength = 5;
     int shakeX,shakeY = 0; 
 
-    //Creating the apple
+    //Apple Field
     Apple apple = new Apple(this, keyH);
+    int maxMiss = 3;
 
 
     //Panel Constructor
@@ -120,12 +121,13 @@ public class Panel extends JPanel implements Runnable{
         if(collH.caught || collH.miss){apple.respawn();}
         scoreH.update();
 
-        if(scoreH.miss >= 3){
-        gH.state = GameStateHandler.State.GAMEOVER;
-        shakeX = 0;
-        shakeY = 0;
-        shakeTimer = 0;
-    }
+        if(scoreH.miss >= maxMiss){
+            gH.state = GameStateHandler.State.GAMEOVER;
+            soundH.playGameOver();
+            shakeX = 0;
+            shakeY = 0;
+            shakeTimer = 0;
+        }
         
     }
 
@@ -140,7 +142,6 @@ public class Panel extends JPanel implements Runnable{
         scoreH.draw(g2);
 
         if(gH.state == GameStateHandler.State.GAMEOVER){
-            soundH.playGameOver();
             gH.drawGameOver(g2);
         }
     }

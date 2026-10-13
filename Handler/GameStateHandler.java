@@ -24,7 +24,18 @@ public class GameStateHandler {
         g2.setColor(Color.white);
         g2.setFont(new Font("Arial", Font.PLAIN, 100));
         int width = g2.getFontMetrics().stringWidth("GAMEOVER");
-        g2.drawString("GAMEOVER", ((gp.w-width)/2), (gp.h/2));
+        g2.drawString("GAMEOVER", ((gp.w-width)/2), ((gp.h/2)-10));
+
+
+        // RESTART OPTION
+        g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        width = g2.getFontMetrics().stringWidth("RESTART?");
+        g2.drawString("RESTART?", ((gp.w-width)/2), ((gp.h/2) + 50));
+
+        // QUIT OPTION
+        g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        width = g2.getFontMetrics().stringWidth("QUIT GAME");
+        g2.drawString("QUIT GAME", ((gp.w-width)/2), ((gp.h/2) + 100));
     }
     
 }
